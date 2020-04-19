@@ -1,0 +1,12 @@
+rule "Periodically check auto lights"
+when
+    Time cron "0 */10 * * * ?"
+then
+	logInfo("LightsAuto", "Auto Light Check")
+	// If nobody is home and lights away mode is auto or if mode is on
+//	if( (Presence.state == OFF && Lights_away_auto.state == "Auto" ) || (Lights_away_auto.state == "On") ){
+		gLights_auto.members.forEach[lamp|
+			lamp.sendCommand( lamp.historicState(now.minusDays(7)).state )
+		]
+//	}
+end

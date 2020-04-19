@@ -1,0 +1,108 @@
+// Switch Presence_Mobile_Andy                  "Andy iPhone"              <network>              {channel="network:device:192_168_1_8:online"}
+// Switch Presence_Mobile_Stephanie             "Stephanie Galaxy"         <network>              {channel="network:device:192_168_1_61:online"}
+
+//Entire Home
+Group    Home                                "Mad House"                <house>
+
+//Floors
+Group    Basement                            "Basement"                 <basementfloor>        (Home)
+Group:Switch:OR(ON,OFF)       gBasement      "Basement"                 <light>                (Home)
+Group    Main                                "Main Floor"               <groundfloor>          (Home)
+Group:Switch:OR(ON,OFF)       gMain          "Main Floor"               <light>                (Home)
+
+//Rooms
+Group    Basement_Bathroom                   "Basement Bathroom"        <bath>                 (Home, Basement)
+Group    Basement_Gym                        "Basement Gym"             <pump>                 (Home, Basement)
+Group    Basement_LivingRoom                 "Basement Living Room"     <parents_2_4>          (Home, Basement)
+Group    Main_Bathroom                       "Main Bathroom"            <bath>                 (Home, Main)
+Group    Main_Dining                         "Main Dining"              <party>                (Home, Main)
+Group    Main_Kitchen                        "Main Kitchen"             <kitchen>              (Home, Main)
+Group    Main_LivingRoom                     "Main Living Room"         <sofa>                 (Home, Main)
+Group    Main_Nursery                        "Nursery"                  <baby_2>               (Home, Main)
+Group    Main_Porch                          "Main Porch"               <group>                (Home, Main)
+Group    Main_BackPorch                      "Back Porch"               <group>                (Home, Main)
+Group    Main_Office                         "Office"                   <office>                (Home, Main)
+
+//Switches
+Dimmer   Basement_Bathroom_Light_Overhead    "Basement Bathroom Lights"   <slider>             (Basement_Bathroom, gLight, gBasement)      {channel="zwave:device:2b9463bf:node18:switch_dimmer"}
+Switch   Basement_Bathroom_Fan               "Basement Bathroom Fan"      <fan_ceiling>        (Basement_Bathroom, gFans, gBasement)       {channel="zwave:device:2b9463bf:node17:switch_binary", expire="30m,command=OFF"}
+Dimmer   Basement_Gym_Light_Overhead         "Basement Gym Lights"        <slider>             (Basement_Gym, gFans, gBasement)            {channel="zwave:device:2b9463bf:node11:switch_dimmer"}
+Dimmer   Basement_Living_Light_Overhead      "Basement Living Room Lights"  <slider>           (Basement_LivingRoom, gLight, gBasement)    {channel="zwave:device:2b9463bf:node10:switch_dimmer"}
+Dimmer   Main_Bathroom_Light_Overhead        "Main Bathroom Lights"       <slider>             (Main_Bathroom, gLight, gMain)              {channel="zwave:device:2b9463bf:node5:switch_dimmer"}
+Switch   Main_Bathroom_Fan                   "Main Bathroom Fan"          <fan_ceiling>        (Main_Bathroom, gFans)                      {channel="zwave:device:2b9463bf:node6:switch_binary"}
+Dimmer   Main_Kitchen_Light_Overhead         "Kitchen Lights"             <slider>             (Main_Kitchen, gLight, gMain)               {channel="zwave:device:2b9463bf:node7:switch_dimmer"}
+Switch   Main_Kitchen_Light_Counter          "Kitchen Counter Lights"     <switch>             (Main_Kitchen_Counter, gLight, gMain)       {channel="zwave:device:2b9463bf:node8:switch_binary"}
+Dimmer   Main_Living_Light_Overhead          "Main Livingroom Lights"     <slider>             (Main_LivingRoom, gLight, gMain)            {channel="zwave:device:2b9463bf:node3:switch_dimmer"}
+Dimmer   Main_Dining_Light_Overhead          "Main Dining Room Lights"    <slider>             (Main_Dining, gLight, gMain)                {channel="zwave:device:2b9463bf:node9:switch_dimmer"}
+Dimmer   Main_Nursery_Light_Overhead         "Main Nursery Room Lights"   <slider>             (Main_Nursery, gLight, gMain)               {channel="zwave:device:2b9463bf:node13:switch_dimmer"}
+Switch   Main_Porch_Light                    "Main Porch Light"           <switch>             (Main_Porch)                                {channel="zwave:device:2b9463bf:node4:switch_binary"}
+Switch   Main_BackPorch_Light                "Back Porch Light"           <switch>             (Main_Porch)                                {channel="zwave:device:2b9463bf:node12:switch_dimmer"}
+
+//Groups
+Group:Switch:OR(ON,OFF)   gLight              "All Lights"                <switch>              (Home)
+
+//Devices
+Switch   Basement_Living_Receiver             "Basement A/V Receiver"    <switch>             (Basementav)                                {channel="yamahareceiver:yamahaAV:5f9ec1b3_ed59_1900_4530_00a0deb90211:power"}
+
+//Shades
+Dimmer   Main_Office_West_Shades               "West Shades"   <slider>             (Main_Office, gLight, gMain)               {channel="zwave:device:2b9463bf:node14:switch_dimmer"}
+
+//Astro
+DateTime         Sunrise_Time       "Sunrise [%1$tH:%1$tM]"                   { channel="astro:sun:home:rise#start" }
+DateTime         Sunset_Time        "Sunset [%1$tH:%1$tM]"                    { channel="astro:sun:home:set#start" }
+
+//Group    Basement_Bedroom1             "Bedroom 1"           <bedroom>            (Home, Basement)
+//Group    Basement_Bedroom2             "Bedroom 2"           <bedroom>            (Home, Basement)
+//Group    Basement_Bedroom3             "Bedroom 3"           <bedroom>            (Home, Basement)
+//Group    Basement_Bathroom             "Bathroom"            <bath>               (Home, Basement)
+//Group    Basement_Stairwell            "Stairwell"           <qualityofservice>   (Home, Basement)
+//Group    Basement_HomeCinema           "Home Cinema"         <screen>             (Home, Basement)
+//Group    Basement_LaundryRoom          "Laundry Room"        <washingmachine>     (Home, Basement)
+//Group    Main_Backyard                 "Backyard"            <lawnmower>          (Home, Main)
+//Group    Main_Bedroom                  "Bedroom"             <bedroom>            (Home, Main)
+//Group    Main_Corridor                 "Corridor"            <corridor>           (Home, Main)
+//Group    Main_Deck                     "Deck"                                     (Home, Main)
+//Group    Main_Entryway                 "Entryway"            <frontdoor>          (Home, Main)
+//Group    Main_Driveway                 "Driveway"                                 (Home, Main)
+//Group    Main_FrontYard                "Front Yard"          <lawnmower>          (Home, Main)
+//Group    Main_Garage                   "Garage"              <garage>             (Home, Main)
+//Group    Main_Hallway                  "Hallway"             <corridor>           (Home, Main)
+//Group    Main_KidsRoom                 "Kids Room"           <girl_3>             (Home, Main)
+//Group    Main_MasterBedroom            "Master Bedroom"      <bedroom_red>        (Home, Main)
+//Group    Main_OMainice                 "OMainice"            <oMainice>             (Home, Main)
+//Group    Main_Patio                    "Patio"               <terrace>            (Home, Main)
+//Group    Main_StorageRoom              "Storage Room"        <suitcase>           (Home, Main)
+
+//Switch   Basement_Bedroom_Light            "Light"             <light>              (Basement_Bedroom, gLight)               {channel=""}
+//Switch   Basement_Bathroom_Light           "Light"             <light>              (Basement_Bathroom, gLight)              {channel=""}
+//Switch   Basement_Bathroom_Fan             "Fan"               <fan_ceiling>        (Basement_Bathroom, Basementan)                {channel=""}
+//Switch   Basement_Stairwell_Light          "Light"             <light>              (Basement_Stairwell, gLight)             {channel=""}
+//Number   Basement_HomeCinema_Heating       "Heating"           <heating>            (Basement_HomeCinema, gHeating)          {channel=""}
+//Number   Basement_HomeCinema_Temperature   "Temperature"       <temperature>        (Basement_HomeCinema, gTemperature)      {channel=""}
+//Switch   Basement_LaundryRoom_Light        "Light"             <light>              (Basement_LaundryRoom, gLight)           {channel=""}
+//Switch   Basement_LaundryRoom_AirCon       "Air Conditioner"   <snow>               (Basement_LaundryRoom, gAirCon)          {channel=""}
+
+//Switch   Main_Bedroom_Light            "Light"             <light>              (Main_Bedroom, gLight)               {channel=""}
+//Switch   Main_Corridor_Light           "Light"             <light>              (Main_Corridor, gLight)              {channel=""}
+//Switch   Main_Deck_Light               "Light"             <light>              (Main_Deck, gLight)                  {channel=""}
+//Switch   Main_Dining_Light             "Light"             <light>              (Main_Dining, gLight)                {channel=""}
+//Switch   Main_Entryway_Light           "Light"             <light>              (Main_Entryway, gLight)              {channel=""}
+//Switch   Main_Driveway_Light           "Light"             <light>              (Main_Driveway, gLight)              {channel=""}
+//Switch   Main_FrontYard_Light          "Light"             <light>              (Main_FrontYard, gLight)             {channel=""}
+//Switch   Main_Garage_Light             "Light"             <light>              (Main_Garage, gLight)                {channel=""}
+//Switch   Main_Hallway_Light            "Light"             <light>              (Main_Hallway, gLight)               {channel=""}
+//Switch   Main_KidsRoom_Light           "Light"             <light>              (Main_KidsRoom, gLight)              {channel=""}
+
+//Switch   Main_Kitchen_Light            "Light"             <light>              (Main_Kitchen, gLight)               {channel=""}
+
+//Switch   Main_MasterBedroom_Light      "Light"             <light>              (Main_MasterBedroom, gLight)         {channel=""}
+//Switch   Main_OMainice_Light           "Light"             <light>              (Main_OMainice, gLight)            {channel=""}
+//Switch   Main_Patio_Light              "Light"             <light>              (Main_Patio, gLight)                 {channel=""}
+//Switch   Main_Porch_Light              "Light"             <light>              (Main_Porch, gLight)                 {channel=""}
+//Switch   Main_StorageRoom_Light        "Light"             <light>              (Main_StorageRoom, gLight)           {channel=""}
+
+
+//Group:Switch:OR(ON, OMain) Basementan     "Fan"                <fan_ceiling>   (Home)
+//Group:Number:AVG           gHeating       "Heating"            <heating>       (Home)
+//Group:Number:AVG           gTemperature   "Temperature"        <temperature>   (Home)
+//Group:Switch:OR(ON, OMain)   gAirCon      "Air Conditioner"    <snow>          (Home)

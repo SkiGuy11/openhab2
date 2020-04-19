@@ -1,0 +1,20 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.java.math.*
+import org.joda.time.*
+
+
+rule "Turn On Porch Light"
+when
+    Time cron "0 0 17 * * ?" // 17:00:00, every day, every month, every weekday, don't care about year
+then
+    Main_Porch_Light.sendCommand(ON)
+end 
+
+rule "Turn Off Porch Light"
+when
+    Time cron "0 0 8 * * ?" // 08:00:00, every day, every month, every weekday, don't care about year
+then
+    Main_Porch_Light.sendCommand(OFF)
+end 

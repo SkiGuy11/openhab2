@@ -1,0 +1,21 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.java.math.*
+import org.joda.time.*
+
+rule "Turn On Porch Light"
+when
+    Channel 'astro:sun:local:civilDusk#event' triggered START
+then
+    Main_Porch_Light.sendCommand(ON)
+end 
+
+rule "Turn Off Porch Light"
+when
+    Channel 'astro:sun:local:civilDawn#event' triggered START
+then
+    Main_Porch_Light.sendCommand(OFF)
+end 
+
+

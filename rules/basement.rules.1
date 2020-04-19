@@ -1,0 +1,21 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.java.math.*
+import org.joda.time.*
+
+
+rule "Turn On Basement_LivingRoom Light"
+when
+    Time cron "0 10 0 * * ?" // 00:10:00, every day, every month, every weekday, don't care about year
+then
+    Basement_LivingRoom.sendCommand(ON)
+end 
+
+rule "Turn Off Basement_LivingRoom Light"
+when
+    Time cron "0 11 0 * * ?" // 00:11:00, every day, every month, every weekday, don't care about year
+then
+    Basement_LivingRoom.sendCommand(OFF)
+end 
+

@@ -1,0 +1,28 @@
+import org.openhab.core.library.types.*
+import org.openhab.core.persistence.*
+import org.openhab.model.script.actions.*
+import org.java.math.*
+import org.joda.time.*
+
+var Timer myTimer = null
+var Number myCounter = 0
+
+rule "trigger"
+when
+   Item Basement_Living_Light_Overhead received command
+then
+   if(myTimer === null) {                             // no timer started, so startup timer
+       myTimer = createTimer(now.plusMillis(5000), [  // timeout is 5 Seconds
+           myTimer = null                             // when timer expired, reset timer
+           myCounter = 0                              // and counter
+       ])
+   }
+   myCounter += 1                                      // each time a command is received, count up
+   if(myCounter == 2) {                                // rule was triggered 4 times within 5 Seconds
+       gLight.sendCommand(OFF)                         // turn off all lights
+       Basement_Living_Light_Overhead.sendCommand(5)   // set basement dimmers to 5%
+   }
+end
+
+
+
