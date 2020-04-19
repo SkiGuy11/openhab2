@@ -18,7 +18,7 @@ then
        ])
    }
    myCounter += 1                                      // each time a command is received, count up
-   if(myCounter == 2) {                                // rule was triggered 4 times within 5 Seconds
+   if(myCounter == 2) {                                // rule was triggered 2 times within 5 Seconds
        gLight.sendCommand(OFF)                         // turn off all lights
        Basement_Living_Light_Overhead.sendCommand(5)   // set basement dimmers to 5%
    }
