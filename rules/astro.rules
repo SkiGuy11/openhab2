@@ -6,16 +6,24 @@ import org.joda.time.*
 
 rule "Turn On Porch Light"
 when
-    Channel 'astro:sun:local:civilDusk#event' triggered START
+    Channel 'astro:sun:home:civilDusk#event' triggered START
 then
+    logInfo("porch", "civil dusk reached. light on.")
     Main_Porch_Light.sendCommand(ON)
 end 
 
 rule "Turn Off Porch Light"
 when
-    Channel 'astro:sun:local:civilDawn#event' triggered START
+    Channel 'astro:sun:home:civilDawn#event' triggered START
 then
+    logInfo("porch", "civil dawn reached. light off.")
     Main_Porch_Light.sendCommand(OFF)
 end 
 
-
+rule "Close Office Blinds"
+when
+    Channel 'astro:sun:home:civilDusk#event' triggered START
+then
+    logInfo("porch", "civil dusk reached. close office blinds.")
+    Main_Office_West_Shades.sendCommand(0)
+end 
