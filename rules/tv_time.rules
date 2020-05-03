@@ -8,21 +8,37 @@ var Timer myTimer = null
 var Number myCounter = 0
 
 rule "trigger"
-when
-   Item Basement_Living_Light_Overhead received command
-then
-   if(myTimer === null) {                             // no timer started, so startup timer
-       myTimer = createTimer(now.plusMillis(5000), [  // timeout is 5 Seconds
-           myTimer = null                             // when timer expired, reset timer
-           myCounter = 0                              // and counter
-       ])
-   }
-   myCounter += 1                                      // each time a command is received, count up
-   if(myCounter == 2) {                                // rule was triggered 2 times within 5 Seconds
-       gLight.sendCommand(OFF)                         // turn off all lights
-       Basement_Living_Light_Overhead.sendCommand(5)   // set basement dimmers to 5%
-   }
+    when
+        Item Basement_Living_Light_Overhead received command
+    then
+        logInfo("tv_time", "basement lightswitch clicked.")
+        logInfo("tv_time", "checking if timer running...")
+        if(myTimer === null) {                             // no timer started, so startup timer
+            logInfo("tv_time", "timer isn't running. starting 5 second timer")
+            myTimer = createTimer(now.plusMillis(5000), [  // timeout is 5 Seconds
+            myTimer = null                             // when timer expired, reset timer
+            myCounter = 0                              // and counter
+        ])
+        }
+        logInfo("tv_time", "increaseing timer by one")
+        myCounter += 1                                      // each time a command is received, count up
+        logInfo("tv_time", "basement lightswitch clicked. checking if this is a second click")
+        if(myCounter == 2) {                                // rule was triggered 2 times within 5 Seconds
+            logInfo("tv_time", "second click detected! (mycounter=2)")
+            logInfo("tv_time", "turn off all the lights in the house")
+            gLight.sendCommand(OFF)                         // turn off all lights
+            logInfo("tv_time", "set the basement living room dimmer to 5")
+            Basement_Living_Light_Overhead.sendCommand(5)   // set basement dimmers to 5%
+        }
 end
 
+rule "dummmy_trigger"
+    when
+        Dummy
+    then
+        logInfo("tv_time", "dummy. time to watch some tv")
+        gLight.sendCommand(OFF)                         // turn off all lights
+        Basement_Living_Light_Overhead.sendCommand(5)   // set basement dimmers to 5%
+end
 
 

@@ -16,10 +16,13 @@ sitemap default label="Mad House" {
         Group item=Main_Nursery
         Group item=Main_Office
         Group item=Main_Porch
-    }
+        Group item=Main_BackPorch
 
+    }
+Frame label="Things" icon="mainfloor" {
     Frame {
         Text label="Lights" icon="light" {
+            Switch item=gLight label="All Lights"
             Default item=Basement_Living_Light_Overhead label="Basement Living Room Lights"
             Default item=Basement_Gym_Light_Overhead label="Basement Gym Lights"
             Default item=Basement_Bathroom_Light_Overhead label="Basement Bathroom Lights"
@@ -29,11 +32,11 @@ sitemap default label="Mad House" {
             Default item=Main_Living_Light_Overhead label="Main Living Room Lights"
             Default item=Main_Dining_Light_Overhead label="Main Dining Lights"
             Default item=Main_Nursery_Light_Overhead label="Main Nursery Light"
-            Default item=Main_Porch_Light label="Porch Light"
-            Switch item=gLight label="All Lights"
+            Default item=Main_Porch_Light label="Front Porch Light"
+            Default item=Main_BackPorch_Light label="Back Porch Light"
         }
-
-        Text label="Fan" icon="fan_ceiling" {
+    }
+        Text label="Fans" icon="fan_ceiling" {
             Default item=Main_Bathroom_Fan label="Main Bathroom Fan"
             Default item=Basement_Bathroom_Fan label="Basement Bathroom Fan"
         }

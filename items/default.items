@@ -19,9 +19,9 @@ Group    Main_Dining                         "Main Dining"              <party> 
 Group    Main_Kitchen                        "Main Kitchen"             <kitchen>              (Home, Main)
 Group    Main_LivingRoom                     "Main Living Room"         <sofa>                 (Home, Main)
 Group    Main_Nursery                        "Nursery"                  <baby_2>               (Home, Main)
-Group    Main_Porch                          "Main Porch"               <group>                (Home, Main)
-Group    Main_BackPorch                      "Back Porch"               <group>                (Home, Main)
-Group    Main_Office                         "Office"                   <office>                (Home, Main)
+Group    Main_Porch                          "Front Porch"              <frontdoor>            (Home, Main)
+Group    Main_BackPorch                      "Back Porch"               <garage>               (Home, Main)
+Group    Main_Office                         "Office"                   <office>               (Home, Main)
 
 //Switches
 Dimmer   Basement_Bathroom_Light_Overhead    "Basement Bathroom Lights"   <slider>             (Basement_Bathroom, gLight, gBasement)      {channel="zwave:device:2b9463bf:node18:switch_dimmer"}
@@ -36,7 +36,7 @@ Dimmer   Main_Living_Light_Overhead          "Main Livingroom Lights"     <slide
 Dimmer   Main_Dining_Light_Overhead          "Main Dining Room Lights"    <slider>             (Main_Dining, gLight, gMain)                {channel="zwave:device:2b9463bf:node9:switch_dimmer"}
 Dimmer   Main_Nursery_Light_Overhead         "Main Nursery Room Lights"   <slider>             (Main_Nursery, gLight, gMain)               {channel="zwave:device:2b9463bf:node13:switch_dimmer"}
 Switch   Main_Porch_Light                    "Main Porch Light"           <switch>             (Main_Porch)                                {channel="zwave:device:2b9463bf:node4:switch_binary"}
-Switch   Main_BackPorch_Light                "Back Porch Light"           <switch>             (Main_Porch)                                {channel="zwave:device:2b9463bf:node12:switch_dimmer"}
+Switch   Main_BackPorch_Light                "Back Porch Light"           <switch>             (Main_BackPorch)                                {channel="zwave:device:2b9463bf:node12:switch_dimmer"}
 
 //Groups
 Group:Switch:OR(ON,OFF)   gLight              "All Lights"                <switch>              (Home)
@@ -48,8 +48,8 @@ Switch   Basement_Living_Receiver             "Basement A/V Receiver"    <switch
 Dimmer   Main_Office_West_Shades               "West Shades"   <slider>             (Main_Office, gLight, gMain)               {channel="zwave:device:2b9463bf:node14:switch_dimmer"}
 
 //Astro
-DateTime         Sunrise_Time       "Sunrise [%1$tH:%1$tM]"                   { channel="astro:sun:home:rise#start" }
-DateTime         Sunset_Time        "Sunset [%1$tH:%1$tM]"                    { channel="astro:sun:home:set#start" }
+//DateTime         Sunrise_Time       "Sunrise [%1$tH:%1$tM]"        (Sunrise)           { channel="astro:sun:home:rise#start" }
+//DateTime         Sunset_Time        "Sunset [%1$tH:%1$tM]"         (Sunset)           { channel="astro:sun:home:set#start" }
 
 //Group    Basement_Bedroom1             "Bedroom 1"           <bedroom>            (Home, Basement)
 //Group    Basement_Bedroom2             "Bedroom 2"           <bedroom>            (Home, Basement)
